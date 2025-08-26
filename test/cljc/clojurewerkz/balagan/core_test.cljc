@@ -1,9 +1,9 @@
 (ns clojurewerkz.balagan.core-test
-  #+cljs (:require-macros [cemerick.cljs.test :refer (is deftest testing)])
+  #?(:cljs (:require-macros [cemerick.cljs.test :refer (is deftest testing)]))
   (:require [clojure.set :as cs]
             [clojurewerkz.balagan.core :as b]
-            #+clj [clojure.test :refer :all]
-            #+cljs [cemerick.cljs.test :as t]))
+            #?(:clj [clojure.test :refer :all])
+            #?(:cljs [cemerick.cljs.test :as t])))
 
 (defn vec-contains?
   "Wether the vec contains certain val"
