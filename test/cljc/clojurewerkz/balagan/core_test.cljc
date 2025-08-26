@@ -1,9 +1,7 @@
 (ns clojurewerkz.balagan.core-test
-  #+cljs (:require-macros [cemerick.cljs.test :refer (is deftest testing)])
   (:require [clojure.set :as cs]
             [clojurewerkz.balagan.core :as b]
-            #+clj [clojure.test :refer :all]
-            #+cljs [cemerick.cljs.test :as t]))
+            [clojure.test :refer [deftest is testing]]))
 
 (defn vec-contains?
   "Wether the vec contains certain val"
@@ -12,14 +10,13 @@
 
 (defn has-all-paths?
   [extracted paths]
-  (do
-    (is (= (count extracted)
-           (count paths))
-        (str "Unmatched extracted paths: "
-             (cs/difference (set extracted) (set paths))))
-    (doseq [path paths]
-      (is (vec-contains? extracted path)
-          (str "Vector `" (vec extracted) "` doesn't contain path `" path "`")))))
+  (is (= (count extracted)
+         (count paths))
+      (str "Unmatched extracted paths: "
+           (cs/difference (set extracted) (set paths))))
+  (doseq [path paths]
+    (is (vec-contains? extracted path)
+        (str "Vector `" (vec extracted) "` doesn't contain path `" path "`"))))
 
 (deftest extract-paths-test
   (testing "Extract paths from a vector"
